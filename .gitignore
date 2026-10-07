@@ -1,0 +1,7 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+
+# The SQLite database file. It is created and filled with sample data on first run.
+backend/typeform.db
