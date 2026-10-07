@@ -1,6 +1,7 @@
 // Everything the frontend knows about the backend: the data types and one function per endpoint.
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// The replace() drops a trailing "/" so "https://api.example.com/" works too.
+const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
 
 export type QuestionType =
   | "short_text"
