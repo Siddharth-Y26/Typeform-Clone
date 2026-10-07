@@ -4,6 +4,14 @@ A form builder modelled on Typeform. A creator builds a form in a drag-and-drop 
 publishes it to get a shareable link, respondents fill it in one question at a time, and
 the creator reads the results.
 
+**Live demo:** https://typeform-clone-mauve.vercel.app
+
+- Fill in a sample form: https://typeform-clone-mauve.vercel.app/to/feedback
+- API docs: https://typeform-clone-api-78o1.onrender.com/docs
+
+The backend runs on a free plan that sleeps when idle, so the first load can take up to
+a minute.
+
 - **Frontend:** Next.js 16 (App Router, TypeScript), Tailwind CSS 4
 - **Backend:** Python, FastAPI, SQLAlchemy
 - **Database:** SQLite
