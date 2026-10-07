@@ -1,0 +1,13 @@
+# Render blueprint: describes how to host the FastAPI backend.
+# On render.com choose New > Blueprint and pick this repository.
+services:
+  - type: web
+    name: typeform-clone-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.2
