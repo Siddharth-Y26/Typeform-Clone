@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Colours of the form being filled in. A container sets the --form-* variables from the
+     chosen theme (see themeStyle in lib/forms.ts); these lines turn them into Tailwind
+     classes such as bg-form-bg, text-question, text-answer and bg-answer/10. */
+  --color-form-bg: var(--form-bg);
+  --color-question: var(--form-question);
+  --color-answer: var(--form-answer);
+  --color-button: var(--form-button);
+  --color-button-text: var(--form-button-text);
+}
+
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Class names for styles that are repeated in many places. */
+@layer components {
+  /* Admin buttons and text fields */
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors disabled:opacity-50;
+  }
+  .btn-dark {
+    @apply bg-neutral-800 text-white hover:bg-neutral-700;
+  }
+  .btn-light {
+    @apply bg-neutral-100 text-neutral-800 hover:bg-neutral-200;
+  }
+  .btn-danger {
+    @apply bg-red-700 text-white hover:bg-red-800;
+  }
+  .field {
+    @apply w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-neutral-800;
+  }
+  .soon-badge {
+    @apply rounded bg-neutral-200 px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-neutral-500 uppercase;
+  }
+
+  /* Form pieces, coloured by the theme */
+  .choice {
+    @apply flex min-w-44 items-center gap-2 rounded border border-answer/60 bg-answer/10 px-2 py-1.5 text-left text-xl text-answer transition-colors;
+  }
+  .choice-selected {
+    @apply border-answer ring-1 ring-answer;
+  }
+  .key-hint {
+    @apply flex h-6 min-w-6 shrink-0 items-center justify-center rounded-sm border border-answer/60 bg-form-bg px-1 text-xs font-bold;
+  }
+  .text-answer-input {
+    @apply w-full border-b border-answer/30 bg-transparent pb-2 text-3xl text-answer outline-none placeholder:text-answer/30 focus:border-answer focus:shadow-[0_1px_0_0_var(--form-answer)];
+  }
+  .ok-button {
+    @apply inline-flex items-center gap-1.5 rounded bg-button px-3.5 py-1.5 text-xl font-bold text-button-text transition-opacity hover:opacity-85;
+  }
+}
+
+/* One-question-at-a-time transitions.
+   "up" means moving forward (the old question leaves upwards, the new one rises from below);
+   "down" is the same thing reversed, for going back. */
+@keyframes enter-from-below {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+}
+@keyframes enter-from-above {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}
+@keyframes leave-to-above {
+  to {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}
+@keyframes leave-to-below {
+  to {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+}
+.enter-up {
+  animation: enter-from-below 0.4s ease-out;
+}
+.enter-down {
+  animation: enter-from-above 0.4s ease-out;
+}
+.leave-up {
+  animation: leave-to-above 0.25s ease-in forwards;
+}
+.leave-down {
+  animation: leave-to-below 0.25s ease-in forwards;
+}
+
+/* A picked option blinks twice before the form moves on, like Typeform. */
+@keyframes blink {
+  50% {
+    opacity: 0.4;
+  }
+}
+.blink {
+  animation: blink 0.15s 2;
+}
