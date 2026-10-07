@@ -28,8 +28,11 @@ COMMENTS = [
     "A few pages loaded slowly on my phone.",
 ]
 
+# The sample forms get fixed ids, so their public links (/to/feedback) stay the
+# same every time the database is created again.
 FORMS = [
     {
+        "id": "feedback",
         "title": "Customer Feedback Survey",
         "theme": "default",
         "is_published": True,
@@ -63,6 +66,7 @@ FORMS = [
         ],
     },
     {
+        "id": "meetup",
         "title": "Tech Meetup Registration",
         "theme": "midnight",
         "is_published": True,
@@ -91,6 +95,7 @@ FORMS = [
         ],
     },
     {
+        "id": "jobs",
         "title": "Job Application",
         "theme": "default",
         "is_published": False,  # a draft, to show both statuses in the dashboard
@@ -132,6 +137,7 @@ def seed_database():
     random.seed(7)  # fixed seed: the same sample data every time
     for data in FORMS:
         form = models.Form(
+            id=data["id"],
             title=data["title"],
             theme=data["theme"],
             is_published=data["is_published"],
